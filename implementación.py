@@ -37,12 +37,27 @@ elif option == "EDA":
             st.write("Primeras filas del dataframe:")
             st.write(df.head())  # Muestra las primeras filas del dataframe
 
+            # Filtrando los productos más vendidos
+            productos_filtrar = [590101, 590102, 590103, 205003, 200130, 800020, 205601, 540101, 501121, 501120]
+            dfinal = df[df['codproducto'].isin(productos_filtrar)]  # Filtrar productos
+
             # Estadísticas descriptivas
             st.write("Estadísticas Descriptivas:")
-            st.write(df.describe())
+            st.write(dfinal.describe())  # Muestra las estadísticas de los productos filtrados
+
+            # Histograma de los productos vendidos
+            st.subheader("Histograma de Productos Vendidos")
+            plt.figure(figsize=(12, 6))
+            dfinal.groupby('nom_producto')['Total_Venta'].sum().plot(kind='bar', color='seagreen', alpha=0.7, edgecolor='black')
+            plt.xlabel("Producto", fontsize=12)
+            plt.ylabel("Total de Ventas", fontsize=12)
+            plt.title("Total de Ventas por Producto", fontsize=14)
+            plt.xticks(rotation=45, ha='right')
+            plt.tight_layout()  # Asegura que las etiquetas no se corten
+            st.pyplot(plt)  # Mostrar gráfico en Streamlit
 
             # Filtrando los datos para el semestre "Spring"
-            spring_data = df[df['Term'] == 'Spring']
+            spring_data = dfinal[dfinal['Term'] == 'Spring']
 
             # Agrupar por año y calcular las sumas de inscripciones por categoría
             enrollment_by_year = spring_data.groupby('Year').agg(
@@ -70,7 +85,7 @@ elif option == "EDA":
             st.plotly_chart(fig1)  # Mostrar gráfico en Streamlit
 
             # Gráfico de líneas con la tendencia de inscripciones por departamento
-            fig2 = px.line(df, 
+            fig2 = px.line(dfinal, 
                            x='Year', 
                            y=['Engineering Enrolled', 'Business Enrolled', 'Arts Enrolled', 'Science Enrolled'], 
                            title='Trends in Enrolled Students by Department',
@@ -83,7 +98,7 @@ elif option == "EDA":
             st.plotly_chart(fig2)  # Mostrar gráfico en Streamlit
 
             # Crear gráfico de líneas para Retention Rate y Student Satisfaction
-            fig3 = px.line(df, 
+            fig3 = px.line(dfinal, 
                            x='Year', 
                            y=['Retention Rate (%)', 'Student Satisfaction (%)'], 
                            title='Retention Rate and Student Satisfaction by Year',
