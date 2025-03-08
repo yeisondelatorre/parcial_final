@@ -13,12 +13,14 @@ option = st.sidebar.radio("Selecciona una opción", ["Introducción", "EDA"])
 if option == "Introducción":
     st.subheader("Introducción de la Base de Datos")
     st.markdown("""
-    Este dashboard presenta el análisis de datos de [nombre del conjunto de datos]. Los datos fueron capturados a partir de [fuente de los datos], utilizando técnicas de [método de captura de datos], entre [fecha de inicio] y [fecha de fin].
-
-    Los objetivos principales del análisis son:
-    - [Objetivo 1]
-    - [Objetivo 2]
-    - [Objetivo 3]
+    - **DESCRIPCIÓN DEL DASH**
+El objetivo de este dashboard es proporcionar a la institución académica una herramienta visual e interactiva que 
+permita monitorear de manera efectiva el proceso de admisión y la satisfacción estudiantil. A través de la implementación 
+de un prototipo en Streamlit, se busca analizar métricas clave como el total de aplicaciones, admisiones e inscripciones por semestre, las 
+tendencias de la tasa de retención a lo largo del tiempo, y los niveles de satisfacción estudiantil. Además, se incluirá un desglose de
+las inscripciones por departamento (Ingeniería, Negocios, Artes y Ciencias) y se realizará una comparación entre las tendencias de los 
+semestres de Primavera y Otoño. Este análisis permitirá identificar las principales tendencias y patrones en los datos, proporcionando 
+hallazgos clave y perspectivas accionables para mejorar los procesos académicos y de retención de estudiantes.
     """)
 
 elif option == "EDA":
